@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIU Virtual - Johan Deyvis</title>
+    <style>
+        /* Estilos generales para replicar la interfaz de la imagen */
+        :root {
+            --fondo-azul: #f4f7ff;
+            --blanco: #ffffff;
+            --rojo-upc: #d32f2f;
+            --texto-negro: #1e293b;
+            --texto-gris: #64748b;
+            --reloj-fondo: #e0e7ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--fondo-azul);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--texto-negro);
+        }
+
+        /* Barra superior */
+        .top-bar {
+            width: 100%;
+            background: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .back-arrow {
+            color: var(--rojo-upc);
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .top-bar h1 {
+            font-size: 18px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contenedor del Reloj */
+        .clock-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #clock {
+            background-color: var(--reloj-fondo);
+            padding: 12px 35px;
+            border-radius: 12px;
+            font-size: 45px;
+            font-weight: 500;
+            color: var(--texto-negro);
+            display: inline-block;
+        }
+
+        #date {
+            margin-top: 12px;
+            color: #475569;
+            font-size: 19px;
+            text-transform: capitalize;
+        }
+
+        /* Foto de perfil (Avatar) */
+        .profile-pic {
+            margin-top: 35px;
+            width: 170px;
+            height: 170px;
+            background-color: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-pic svg {
+            width: 100%;
+            fill: #cbd5e1;
+        }
+
+        /* Tarjeta Blanca de Datos */
+        .info-card {
+            background: var(--blanco);
+            width: 88%;
+            max-width: 380px;
+            margin-top: -45px; /* Sube la tarjeta para que el avatar quede encima */
+            padding: 70px 20px 40px 20px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .user-name {
+            color: var(--rojo-upc);
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .label {
+            color: var(--texto-gris);
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            color: var(--texto-negro);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .career-title {
+            color: #334155;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 25px;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .campus {
+            color: var(--texto-gris);
+            font-size: 16px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pin {
+            color: var(--rojo-upc);
+            margin-right: 6px;
+            font-style: normal;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span class="back-arrow">‹</span>
+        <h1>TIU Virtual</h1>
+    </div>
+
+    <div class="clock-section">
+        <div id="clock">00:00:00</div>
+        <div id="date">Cargando fecha...</div>
+    </div>
+
+    <div class="profile-pic">
+        <svg viewBox="0 0 24 24">
+            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+        </svg>
+    </div>
+
+    <div class="info-card">
+        <div class="user-name">
+            Johan Deyvis<br>C***** L****
+        </div>
+
+        <div class="label">Código de alumno:</div>
+        <div class="value">U20251H152</div>
+
+        <div class="label">ID Banner:</div>
+        <div class="value">N05069848</div>
+
+        <div class="career-title">Ingeniería de Software</div>
+        <div class="campus">
+            <i class="pin">📍</i> Campus San Miguel
+        </div>
+    </div>
+
+    <script>
+        function updateLimaTime() {
+            // Obtener fecha y hora actual configurada para Lima, Perú
+            const now = new Date();
+            
+            const timeOptions = { 
+                timeZone: 'America/Lima', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: false 
+            };
+            
+            const dateOptions = { 
+                timeZone: 'America/Lima', 
+                weekday: 'long', 
+                day: 'numeric', 
+                month: 'short', 
+                year: 'numeric' 
+            };
+
+            // Formatear Hora
+            const timeString = new Intl.DateTimeFormat('es-PE', timeOptions).format(now);
+            document.getElementById('clock').textContent = timeString;
+
+            // Formatear Fecha (Ej: Viernes, 17 Abr 2026)
+            let dateString = new Intl.DateTimeFormat('es-PE', dateOptions).format(now);
+            // Limpiar puntos que a veces pone el formato es-PE
+            dateString = dateString.replace(/\./g, '');
+            // Capitalizar primera letra
+            dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
+            
+            document.getElementById('date').textContent = dateString;
+        }
+
+        // Ejecutar inmediatamente y luego cada segundo
+        updateLimaTime();
+        setInterval(updateLimaTime, 1000);
+    </script>
+</body>
+</html>
